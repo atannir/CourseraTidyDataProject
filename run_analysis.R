@@ -16,6 +16,8 @@
 
 ## Using R 3.1.1
 
+library("reshape2")
+
 ## Step 1-1:
 ## READ ALL THE DATA!!
 
@@ -30,6 +32,9 @@ x_test <- read.table("UCI HAR Dataset/test/X_test.txt", colClasses = c("numeric"
 y_test <- read.table("UCI HAR Dataset/test/y_test.txt") ## 2947 obs of 1 var
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt") ## 2947 obs of 1 v
 
+## take only the columns we want
+x_test <- x_test[c(201, 202, 214, 215, 227, 228, 240, 241, 253, 254, 503, 504, 516, 517, 529, 530, 542, 543)]
+
 x_test[,"activity"] <- y_test
 x_test$activity <- as.factor(x_test$activity)
 x_test[, "subject"] <- subject_test
@@ -43,18 +48,22 @@ x_test$activity_labels <- factor(x_test$activity_labels, levels = c(1,2,3,4,5,6)
                                             "STANDING","LAYING"))
 
 
-# x_train <- read.table("UCI HAR Dataset/train/X_train.txt", colClasses = c("numeric"), col.names = features) ## 7352 of 561 v
-# y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
-# subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
-# 
-# x_train[,"activity"] <- y_train
-# x_train$activity <- as.factor(x_train$activity)
-# x_train[, "subject"] <- subject_train
-# x_train$subject <- as.factor(x_train$subject)
+x_train <- read.table("UCI HAR Dataset/train/X_train.txt", colClasses = c("numeric"), col.names = features) ## 7352 of 561 v
+y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
+subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
+ 
+x_train <- x_train[c(201, 202, 214, 215, 227, 228, 240, 241, 253, 254, 503, 504, 516, 517, 529, 530, 542, 543)]
 
+x_train[,"activity"] <- y_train
+x_train$activity <- as.factor(x_train$activity)
+x_train[, "subject"] <- subject_train
+x_train$subject <- as.factor(x_train$subject)
 
-
-
+x_train$activity_labels <- x_train$activity
+x_train$activity_labels <- factor(x_train$activity_labels, levels = c(1,2,3,4,5,6),
+                                 labels = c("WALKING","WALKING_UPSTAIRS",
+                                            "WALKING_DOWNSTAIRS","SITTING",
+                                            "STANDING","LAYING"))
 
 ## Step 1-2:
 ## merge all data, free up memory
@@ -68,6 +77,4 @@ x_test$activity_labels <- factor(x_test$activity_labels, levels = c(1,2,3,4,5,6)
 # rm(x_train)
 # rm(y_train)
 # rm(features)
-
-## "extract only the mean and standard deviation for each measurement"
 
