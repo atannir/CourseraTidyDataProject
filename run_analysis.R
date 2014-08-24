@@ -35,6 +35,14 @@ x_test$activity <- as.factor(x_test$activity)
 x_test[, "subject"] <- subject_test
 x_test$subject <- as.factor(x_test$subject)
 
+## Ugly but it will do
+x_test$activity_labels <- x_test$activity
+x_test$activity_labels <- factor(x_test$activity_labels, levels = c(1,2,3,4,5,6),
+                                 labels = c("WALKING","WALKING_UPSTAIRS",
+                                            "WALKING_DOWNSTAIRS","SITTING",
+                                            "STANDING","LAYING"))
+
+
 # x_train <- read.table("UCI HAR Dataset/train/X_train.txt", colClasses = c("numeric"), col.names = features) ## 7352 of 561 v
 # y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
 # subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
@@ -44,7 +52,6 @@ x_test$subject <- as.factor(x_test$subject)
 # x_train[, "subject"] <- subject_train
 # x_train$subject <- as.factor(x_train$subject)
 
-## Ugly but it will do
 
 
 
