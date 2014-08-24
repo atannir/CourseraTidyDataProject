@@ -14,6 +14,8 @@
 ## We begin by putting the script in the same directory where we have the dataset directory
 ## (One level up from the actual data files, like features.txt)
 
+## Using R 3.1.1
+
 ## Step 1-1:
 ## READ ALL THE DATA!!
 
@@ -29,14 +31,22 @@ y_test <- read.table("UCI HAR Dataset/test/y_test.txt") ## 2947 obs of 1 var
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt") ## 2947 obs of 1 v
 
 x_test[,"activity"] <- y_test
+x_test$activity <- as.factor(x_test$activity)
 x_test[, "subject"] <- subject_test
+x_test$subject <- as.factor(x_test$subject)
 
 # x_train <- read.table("UCI HAR Dataset/train/X_train.txt", colClasses = c("numeric"), col.names = features) ## 7352 of 561 v
 # y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
 # subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
 # 
 # x_train[,"activity"] <- y_train
+# x_train$activity <- as.factor(x_train$activity)
 # x_train[, "subject"] <- subject_train
+# x_train$subject <- as.factor(x_train$subject)
+
+## Ugly but it will do
+
+
 
 
 ## Step 1-2:
