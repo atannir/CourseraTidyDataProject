@@ -18,19 +18,39 @@
 ## READ ALL THE DATA!!
 
 ## basedir <- "UCI HAR Dataset/"
-features <- read.table("UCI HAR Dataset/features.txt") ## 561 obs of 2 vars, rownums incl
+activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt")
 
-x_test <- read.table("UCI HAR Dataset/test/X_test.txt") ## 2947 obs of 561 vars
+features <- read.table("UCI HAR Dataset/features.txt") ## 561 obs of 2 vars, rownums incl
+features <- features[2] ## simplify, cut row numbers
+features <- as.vector(features[,1]) ## it works, but not pretty.
+
+x_test <- read.table("UCI HAR Dataset/test/X_test.txt", colClasses = c("numeric"), col.names = features) ## 2947 obs of 561 vars
 y_test <- read.table("UCI HAR Dataset/test/y_test.txt") ## 2947 obs of 1 var
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt") ## 2947 obs of 1 v
 
-x_train <- read.table("UCI HAR Dataset/train/X_train.txt") ## 7352 of 561 v
-y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
-subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
+x_test[,"activity"] <- y_test
+x_test[, "subject"] <- subject_test
+
+# x_train <- read.table("UCI HAR Dataset/train/X_train.txt", colClasses = c("numeric"), col.names = features) ## 7352 of 561 v
+# y_train <- read.table("UCI HAR Dataset/train/y_train.txt") ## 7352 of 1 v
+# subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt") ## 7352 of 1 v
+# 
+# x_train[,"activity"] <- y_train
+# x_train[, "subject"] <- subject_train
+
 
 ## Step 1-2:
-## Stick it together
+## merge all data, free up memory
 
+# all_data <- rbind(x_test, x_train)
+# 
+# rm(subject_test)
+# rm(x_test)
+# rm(y_test)
+# rm(subject_train)
+# rm(x_train)
+# rm(y_train)
+# rm(features)
 
-
+## "extract only the mean and standard deviation for each measurement"
 

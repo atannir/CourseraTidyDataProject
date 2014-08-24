@@ -1,3 +1,4 @@
 *.zip
-UCI HAR Dataset/
-UCI HAR Dataset/*
+UCI HAR Dataset
+CourseraTidyDataProject.Rproj
+.Rproj.user
