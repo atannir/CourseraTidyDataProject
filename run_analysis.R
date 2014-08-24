@@ -68,7 +68,7 @@ x_train$activity_labels <- factor(x_train$activity_labels, levels = c(1,2,3,4,5,
 ## Step 1-2:
 ## merge all data, free up memory
 
-# all_data <- rbind(x_test, x_train)
+all_data <- rbind(x_test, x_train)
 # 
 # rm(subject_test)
 # rm(x_test)
