@@ -78,3 +78,7 @@ all_data <- rbind(x_test, x_train)
 # rm(y_train)
 # rm(features)
 
+#Perform the aggregation on the combined dataset
+
+
+#write the file out.
