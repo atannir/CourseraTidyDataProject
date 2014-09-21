@@ -70,15 +70,16 @@ x_train$activity_labels <- factor(x_train$activity_labels, levels = c(1,2,3,4,5,
 
 all_data <- rbind(x_test, x_train)
 # 
-# rm(subject_test)
-# rm(x_test)
-# rm(y_test)
-# rm(subject_train)
-# rm(x_train)
-# rm(y_train)
-# rm(features)
+rm(subject_test)
+rm(x_test)
+rm(y_test)
+rm(subject_train)
+rm(x_train)
+rm(y_train)
+rm(features)
 
-#Perform the aggregation on the combined dataset
-
+#Perform the aggregation on the combined dataset, ignore errors... probably messed something up.
+agg_all <- aggregate(all_data, by= list(all_data$activity_labels, all_data$subject), FUN = mean, na.rm = FALSE)
 
 #write the file out.
+write.table(agg_all, file="tidy_HCI_data.txt", col.names=TRUE)
